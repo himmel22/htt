@@ -24,7 +24,10 @@ def main():
 
 def search_list(url, max_id):
 
-    result = requests.get(url)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36'
+    }
+    result = requests.get(url, headers=headers)
     result.encoding = 'utf-8'
 
     print url, result.status_code, result.headers['date']

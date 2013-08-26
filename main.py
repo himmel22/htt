@@ -14,10 +14,12 @@ def main():
         if is_end is True:
             page_num = 1
             max_id = get_max_id()
+            time.sleep(600)
         else:
             page_num = page_num + 1
+            time.sleep(10)
 
-        time.sleep(5)
+        
 
 
 def search_list(url, max_id):

@@ -3,6 +3,10 @@ from bs4 import BeautifulSoup
 import sys, os, time, re
 
 
+proxies = {
+  "http": "http://127.0.0.1:2236"
+  }
+
 def main():
 
     page_num = 1
@@ -27,7 +31,7 @@ def search_list(url, max_id):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36'
     }
-    result = requests.get(url, headers=headers)
+    result = requests.get(url, headers=headers, proxies=proxies)
     result.encoding = 'utf-8'
 
     print url, result.status_code, result.headers['date']
@@ -71,14 +75,14 @@ def load_keywords():
 
 
 def download_torrent(url, filename):
-    result = requests.get(url)
+    result = requests.get(url, proxies=proxies)
     result.encoding = 'utf-8'
 
     soup = BeautifulSoup(result.text)
 
     download_link = soup.select('.viewdownloadbutton a')[0]['href']
 
-    torrent_file = requests.get(download_link)
+    torrent_file = requests.get(download_link, proxies=proxies)
 
     output = open(filename,'wb')
     output.write(torrent_file.content)

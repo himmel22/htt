@@ -55,7 +55,7 @@ def search_list(url, max_id):
             is_end = True
             for key in keywords:
                 if key in link.text: 
-                    filename = '/Users/himmel/Downloads/torrent/' + link.text + '.torrent'
+                    filename = '/Users/himmel/Downloads/torrent/' + link.text.replace("/", "") + '.torrent'
                     if not os.path.isfile(filename):
                         download_torrent(link['href'], filename)
 
@@ -83,10 +83,9 @@ def download_torrent(url, filename):
     download_link = soup.select('.viewdownloadbutton a')[0]['href']
 
     torrent_file = requests.get(download_link, proxies=proxies)
-
-    output = open(filename,'wb')
-    output.write(torrent_file.content)
-    output.close()
+    with open(filename, 'wb') as torrent:
+        torrent.write(torrent_file.content)
+        torrent.close()
     print filename
 
 def get_max_id():

@@ -11,7 +11,6 @@ def main():
 
     page_num = 1
     max_id = get_max_id()
-
     while 1:
         is_end = search_list('http://sukebei.nyaa.se/?offset=%d' % page_num, max_id)
 
@@ -27,7 +26,6 @@ def main():
 
 
 def search_list(url, max_id):
-
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36'
     }
@@ -44,20 +42,17 @@ def search_list(url, max_id):
     new_max_id = max_id
 
     for link in soup.select('.tlistname a'):
-
         link_id = int(last_num_reg.findall(link['href'])[0])
-
-        if link_id > new_max_id: 
-            new_max_id = link_id
-
-        if link_id < max_id:
-            
-            is_end = True
+        if link_id > max_id: 
             for key in keywords:
-                if key in link.text: 
+                if key in link.text:
                     filename = '/Users/himmel/Downloads/torrent/' + link.text.replace("/", "") + '.torrent'
                     if not os.path.isfile(filename):
                         download_torrent(link['href'], filename)
+        if link_id < max_id:
+            is_end = True
+        if link_id > new_max_id:
+            new_max_id = link_id
 
     if new_max_id > get_max_id(): 
         set_max_id(new_max_id)

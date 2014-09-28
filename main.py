@@ -4,7 +4,7 @@ import sys, os, time, re
 
 
 proxies = {
-	"http": "http://127.0.0.1:2236"
+	"https": "http://127.0.0.1:2236"
   }
 
 def main():
@@ -49,6 +49,7 @@ def search_list(url, max_id):
                     filename = '/Users/himmel/Downloads/torrent/' + link.text.replace("/", "") + '.torrent'
                     if not os.path.isfile(filename):
                         download_torrent(link['href'], filename)
+			time.sleep(5)
         if link_id < max_id:
             is_end = True
         if link_id > new_max_id:

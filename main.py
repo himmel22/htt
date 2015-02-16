@@ -1,10 +1,10 @@
-import requests
+import requesocks as requests
 from bs4 import BeautifulSoup
 import sys, os, time, re
 
 
 proxies = {
-	"https": "http://192.168.11.100:3128"
+	"http": "socks5://192.168.11.100:3128"
   }
 
 def main():

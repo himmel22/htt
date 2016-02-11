@@ -17,6 +17,7 @@ def main():
         if is_end is True:
             page_num = 1
             max_id = get_max_id()
+            print 'All done. Sleeping for 600s.'
             time.sleep(600)
         else:
             page_num = page_num + 1
@@ -52,7 +53,10 @@ def search_list(url, max_id):
                 for key in keywords:
                     if key in link.text:
                         print key + ' hit'
-                        filename = '/home/himmel/torrent/' + link.text.strip().replace("/", "").replace(" ", "") + '.torrent'
+                        dirname = '/home/himmel/torrent/' + key.strip().replace("/", "")
+                        if not os.path.exists(dirname):
+                            os.makedirs(dirname)
+                        filename = dirname + '/' + link.text.strip().replace("/", "") + '.torrent'
                         if not os.path.isfile(filename):
                             download_torrent('https://share.dmhy.org/' + link['href'], filename)
     			time.sleep(5)

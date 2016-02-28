@@ -53,9 +53,10 @@ def search_list(url, max_id):
                 for key in keywords:
                     if key in link.text:
                         print key + ' hit'
-                        dirname = '/home/himmel/torrent/' + key.strip().replace("/", "")
+                        dirname = '/mnt/hgfs/down/torrent/' + key.strip().replace("/", "")
                         if not os.path.exists(dirname):
                             os.makedirs(dirname)
+			print link.text.strip()
                         filename = dirname + '/' + link.text.strip().replace("/", "") + '.torrent'
                         if not os.path.isfile(filename):
                             download_torrent('https://share.dmhy.org/' + link['href'], filename)

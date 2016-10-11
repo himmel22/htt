@@ -4,7 +4,7 @@ import sys, os, time, re
 
 
 proxies = {
-	"https": "socks5://127.0.0.1:2222"
+	"https": "socks5://192.168.1.1:1234"
   }
 
 def main():

@@ -53,7 +53,7 @@ def search_list(url, max_id):
                 for key in keywords:
                     if key in link.text:
                         print key + ' hit'
-                        dirname = '/mnt/hgfs/down/torrent/' + key.strip().replace("/", "")
+                        dirname = '/mnt/c/Users/himmelmk10/Downloads/torrent/' + key.strip().replace("/", "")
                         if not os.path.exists(dirname):
                             os.makedirs(dirname)
 			print link.text.strip()
